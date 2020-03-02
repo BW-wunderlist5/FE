@@ -23,7 +23,10 @@ const Registration = ({}) => {
         )}
         <button type="submit">SUBMIT</button>
         <h3>Already registered?</h3>
-        <button type="button">Login here</button>
+        <Route exact path="/login">
+          <button type="button">Login here</button>
+          <Login />
+        </Route>
       </Form>
     </div>
   );
@@ -51,6 +54,6 @@ const FormikForms = withRouter(
         })
         .catch(err => console.log(err.response));
     }
-  })(LoginForm)
+  })(Registration)
 );
 export default FormikForms;
