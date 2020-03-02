@@ -8,7 +8,9 @@ const TempLogin = () => {
     <div>
       <h1>WunderList </h1>
       <Form>
+        <label htmlFor="email">Email</label>
         <Field type="text" name="email" />
+        <label htmlFor="password">Password</label>
         <Field type="password" name="password" />
         <button type="submit">Login</button>
       </Form>
@@ -30,7 +32,7 @@ const FormikForm = withRouter(
         .then((res) => {
           console.log(res);
           window.localStorage.setItem("token", res.data.payload);
-          props.history.replace("/todos");
+          props.history.push("/todos");
         })
         .catch((err) => console.log(err));
     }

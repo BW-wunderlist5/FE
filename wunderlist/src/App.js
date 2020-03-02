@@ -11,7 +11,9 @@ function App() {
     <Router>
       <div className="App">
         <Route exact path="/" component={TempLogin} />
-        <PrivateRoute path="todos/users/:userID" component={TodoPage} />
+        <Route path="/todos">
+          <TodoPage />
+        </Route>
       </div>
     </Router>
   );
