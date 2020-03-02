@@ -29,8 +29,8 @@ const FormikForm = withRouter(
         .post("login", values)
         .then((res) => {
           console.log(res);
-          // window.localStorage.setItem("token", res.data.payload);
-          // props.history.replace("/colors");
+          window.localStorage.setItem("token", res.data.payload);
+          props.history.replace("/todos");
         })
         .catch((err) => console.log(err));
     }
