@@ -1,5 +1,7 @@
 import React from "react";
 
+import "react-datepicker/dist/react-datepicker.css";
+
 function Todo({ item, handleChange, handleSubmit, editItem }) {
   return (
     <div className="todo-card">
@@ -12,6 +14,7 @@ function Todo({ item, handleChange, handleSubmit, editItem }) {
             value={item}
             onChange={handleChange}
           />
+
           <button className={editItem ? "btn edit" : "btn add"} type="submit">
             {" "}
             {editItem ? "edit todo" : "add todo"}{" "}

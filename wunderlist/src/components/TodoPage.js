@@ -2,6 +2,8 @@ import React, { useEffect, useState } from "react";
 import { axiosWithAuth } from "../utils/axiosWithAuth";
 import Todo from "./Todo";
 import TodoList from "./TodoList";
+import NavBar from "./NavBar";
+import { NavLink } from "react-router-dom";
 
 //will act as main state holder for component tree
 
@@ -40,6 +42,7 @@ export default function TodoPage() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+
     const newItem = {
       id: Date.now(),
       title: value.item
@@ -80,8 +83,10 @@ export default function TodoPage() {
 
   return (
     <div>
+      <NavBar user={user} />
       <h1>TodoPage</h1>
-      <h3> {user.email} </h3>
+      {/* <h3> {user.email} </h3> */}
+
       <div className="todo-container">
         <h4>Enter Todo</h4>
         <Todo

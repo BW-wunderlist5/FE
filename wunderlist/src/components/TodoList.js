@@ -4,7 +4,7 @@ import TodoItem from "./TodoItem";
 function TodoList({ items, clearList, handleDelete, handleEdit }) {
   return (
     <ul className="todo-ul">
-      <h3>Todo List</h3>
+      {/* <h3 className="todo-list-header">Todo List</h3> */}
 
       {items.map((item) => {
         return (

@@ -5,6 +5,7 @@ import PrivateRoute from "./components/PrivateRoute";
 
 import TempLogin from "./components/TempLogin";
 import TodoPage from "./components/TodoPage";
+import NavBar from "./components/NavBar";
 
 function App() {
   return (
