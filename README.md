@@ -1,5 +1,8 @@
+<<<<<<< HEAD
 # FE
 
+=======
+>>>>>>> aa69b19da602ad1c21046b070f7c70cb70cd3871
 ☝️ Proposal
 
 What problem does your app solve?
