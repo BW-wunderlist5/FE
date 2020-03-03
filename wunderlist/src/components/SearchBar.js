@@ -2,26 +2,25 @@ import React, { useState, useContext, useEffect } from "react";
 import { TodosContext } from "../contexts/TodosContext";
 
 const SearchBar = () => {
-  const search = useContext(TodosContext);
-  const [searchItems, setSearchItems] = useState("");
-  const [searchResults, setSearchResults] = useState([search.todo.items]);
+  // const search = useContext(TodosContext);
+  const { todo, handleSearchChange, searchItems } = useContext(TodosContext);
+  console.log(handleSearchChange, "log from search bar");
 
-  console.log("console search context: ", search);
+  // const [searchItems, setSearchItems] = useState("");
+  // const [searchResults, setSearchResults] = useState([todo.items]);
 
-  const handleSearchChange = (e) => {
-    setSearchItems(e.target.value);
-  };
+  // console.log("console search context: ", searchResults);
+  // console.log("another log for this friggin search bar", todo.items);
+
+  // const handleSearchChange = (e) => {
+  //   setSearchItems(e.target.value);
+  // };
 
   // useEffect(() => {
-  //   const results = searchResults.filter((item) =>
-  //     item.toLowerCase().includes(searchItems)
-  //   );
+  //   const results = searchResults.filter((item) => item.includes(searchItems));
+
   //   setSearchResults(results);
   // }, [searchItems]);
-
-  // const handleSearch = (id) => {
-
-  // }
 
   return (
     <div className="search-container">

@@ -6,12 +6,13 @@ import NavBar from "./NavBar";
 import SearchBar from "./SearchBar";
 import { TodosContext } from "../contexts/TodosContext";
 import { UserContext } from "../contexts/UserContext";
+// import { useLocalStorage } from "../hooks/useLocalStorage";
 
 //will act as main state holder for component tree
 
 export default function TodoPage() {
   const [user, setUser] = useState([]);
-
+  const [searchItems, setSearchItems] = useState("");
   const [todo, setTodo] = useState({
     items: [],
     id: Date.now(),
@@ -39,6 +40,19 @@ export default function TodoPage() {
     setTodo({
       ...todo,
       item: e.target.value
+    });
+  };
+
+  const handleSearchChange = (e) => {
+    setSearchItems(e.target.value);
+  };
+
+  const handleSearch = () => {
+    let filteredTodos = todo.items.filter((item) =>
+      item.title.includes(searchItems)
+    );
+    setTodo({
+      items: filteredTodos
     });
   };
 
@@ -92,7 +106,10 @@ export default function TodoPage() {
         handleDelete,
         handleSubmit,
         clearList,
-        handleEdit
+        handleEdit,
+        handleSearchChange,
+        searchItems,
+        handleSearch
       }}
     >
       <UserContext.Provider value={{ user }}>
