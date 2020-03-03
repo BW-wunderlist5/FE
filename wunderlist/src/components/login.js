@@ -2,27 +2,45 @@ import React, { useState } from "react";
 import { withFormik, Form, Field } from "formik";
 import { axiosWithAuth } from "../utils/axiosWithAuth";
 import { withRouter } from "react-router-dom";
+import styled from "styled-components";
+import { Jumbotron, Button } from "reactstrap";
 
 const LoginForm = ({}) => {
   const [person, setPerson] = useState([]);
 
+  const NewContainer = styled.container`
+    .jumbotron: {
+      background: blue;
+    }
+  `;
+
+  const NewButton = styled.button`
+    margin: auto;
+    width: 50%;
+    border: 2px solid black;
+  `;
+
   return (
-    <div className="container">
-      <Form>
-        <label htmlFor="email">Email: </label>
-        <Field name="email" type="email" />
-        {touched.email && errors.email && (
-          <p className="errors">{errors.email}</p>
-        )}
-        <br />
-        <label htmlFor="password">Password: </label>
-        <Field name="password" type="password" />
-        {touched.password && errors.password && (
-          <p className="errors">{errors.password}</p>
-        )}
-        <button type="submit">SUBMIT</button>
-      </Form>
-    </div>
+    <NewContainer className="container">
+      <Jumbotron>
+        <Form>
+          <label htmlFor="email">Email: </label>
+          <Field name="email" type="email" />
+          {touched.email && errors.email && (
+            <p className="errors">{errors.email}</p>
+          )}
+          <br />
+          <label htmlFor="password">Password: </label>
+          <Field name="password" type="password" />
+          {touched.password && errors.password && (
+            <p className="errors">{errors.password}</p>
+          )}
+          <NewButton color="warning" type="submit">
+            SUBMIT
+          </NewButton>
+        </Form>
+      </Jumbotron>
+    </NewContainer>
   );
 };
 

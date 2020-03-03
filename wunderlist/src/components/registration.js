@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { withFormik, Form, Field } from "formik";
 import { axiosWithAuth } from "../utils/axiosWithAuth";
 import { withRouter } from "react-router-dom";
+import styled from "styled-components";
 
 const Registration = ({}) => {
   const [person, setPerson] = useState([]);
