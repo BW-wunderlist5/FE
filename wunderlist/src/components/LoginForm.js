@@ -3,22 +3,21 @@ import { withFormik, Form, Field } from "formik";
 import { axiosWithAuth } from "../utils/axiosWithAuth";
 import { withRouter } from "react-router-dom";
 import styled from "styled-components";
+
 import { Jumbotron, Button } from "reactstrap";
-
-const LoginForm = ({}) => {
-  const [person, setPerson] = useState([]);
-
-  const NewContainer = styled.container`
+import * as Yup from "yup";
+const LoginForm = ({ touched, errors }) => {
+  const NewContainer = styled.div`
     .jumbotron: {
-      background: blue;
+      background-color: blue;
     }
   `;
 
-  const NewButton = styled.button`
-    margin: auto;
-    width: 50%;
-    border: 2px solid black;
-  `;
+  //const NewButton = styled.button`
+  //margin: auto;
+  //width: 50%;
+  //border: 2px solid black;
+  //`;
 
   return (
     <NewContainer className="container">
@@ -35,9 +34,9 @@ const LoginForm = ({}) => {
           {touched.password && errors.password && (
             <p className="errors">{errors.password}</p>
           )}
-          <NewButton color="warning" type="submit">
+          <Button color="warning" type="submit">
             SUBMIT
-          </NewButton>
+          </Button>
         </Form>
       </Jumbotron>
     </NewContainer>
@@ -61,8 +60,8 @@ const FormikForms = withRouter(
         .post("login", values)
         .then(response => {
           console.log("success", response);
-          window.localStorage.setItem("token", response.data.payload);
-          //props.history.replace();
+          window.localStorage.setItem("token", response.data.token);
+          props.history.push("/todos");
         })
         .catch(err => console.log(err.response));
     }
