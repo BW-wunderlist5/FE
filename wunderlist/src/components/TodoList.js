@@ -7,8 +7,6 @@ function TodoList() {
   console.log("console log for context, value: ", list);
   return (
     <ul className="todo-ul">
-      {/* <h3 className="todo-list-header">Todo List</h3> */}
-
       {list.todo.items.map((item) => {
         return (
           <TodoItem
@@ -16,7 +14,6 @@ function TodoList() {
             {...item}
             handleDelete={() => list.handleDelete(item.id)}
             handleEdit={() => list.handleEdit(item.id)}
-            // title={list.todo.items.title}
           />
         );
       })}

@@ -17,8 +17,8 @@ const NavBar = () => {
         <h3 className="logo">
           <span className="logo-span">
             <i class="fas fa-wave-square"></i>
-          </span>{" "}
-          LOGO HERE{" "}
+          </span>
+          LOGO HERE
         </h3>
       </div>
       <div className="avatar-container">
@@ -30,28 +30,19 @@ const NavBar = () => {
         <p> {user.email}</p>
       </div>
 
-      {/* <img src={logo} alt="logo" /> */}
       <div className="nav-links">
-        <NavLink to="/dashboard">
+        <NavLink to="/">
           <span className="icon-span">
-            {/* <FontAwesomeIcon icon={faHome} /> */}
             <i class="fas fa-home"></i>
           </span>
           Home
         </NavLink>
-        <NavLink to="/dashboard/todos">
+        <NavLink to="/todos">
           <span className="icon-span">
             <i class="fas fa-list-alt"></i>
-            {/* <FontAwesomeIcon icon={faListAlt} /> */}
           </span>
           Todos
         </NavLink>
-        {/* <NavLink to="/calendar">
-            <span className="icon-span">
-              <FontAwesomeIcon icon={faCalendarAlt} />
-            </span>
-            My Calendar
-          </NavLink> */}
         <NavLink onClick={logOut} to="/">
           <span className="icon-span">
             <i class="fas fa-sign-out-alt"></i>

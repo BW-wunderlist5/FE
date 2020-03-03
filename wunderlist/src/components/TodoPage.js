@@ -25,7 +25,7 @@ export default function TodoPage() {
       .then((res) => {
         console.log(res);
         setUser(res.data.data);
-        // localStorage.setItem("token", res.data.token);
+        // localStorage.setItem("user", res.data.token);
       })
       .catch((err) => console.log(err));
   };
@@ -88,7 +88,6 @@ export default function TodoPage() {
     <TodosContext.Provider
       value={{
         todo,
-        setTodo,
         handleChange,
         handleDelete,
         handleSubmit,
@@ -100,23 +99,13 @@ export default function TodoPage() {
         <div>
           <NavBar />
           <h1>Your Todo Page</h1>
-          {/* <div className="search-container">
+          <div className="search-container">
             <SearchBar />
-          </div> */}
+          </div>
           <div className="todo-container">
             <h4>Enter Todo</h4>
-            <Todo
-            // item={value.item}
-            // handleChange={handleChange}
-            // handleSubmit={handleSubmit}
-            // editItem={value.editItem}
-            />
-            <TodoList
-            // items={value.items}
-            // clearList={clearList}
-            // handleDelete={handleDelete}
-            // handleEdit={handleEdit}
-            />
+            <Todo />
+            <TodoList />
           </div>
         </div>
       </UserContext.Provider>
