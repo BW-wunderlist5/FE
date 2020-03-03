@@ -1,16 +1,32 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { TodosContext } from "../contexts/TodosContext";
-
-import "react-datepicker/dist/react-datepicker.css";
 
 function Todo() {
   // { item, handleChange, handleSubmit, editItem }
 
-  const { item, handleChange, handleSubmit, editItem } = useContext(
+  const { todo, item, setTodo, handleChange, handleSubmit } = useContext(
     TodosContext
   );
 
-  console.log(TodosContext);
+  console.log("todo console from todo.js", todo);
+
+  console.log("Log for todoscontext in todo.js", TodosContext);
+
+  // const handleSubmit = (e) => {
+  //   e.preventDefault();
+
+  //   const newItem = {
+  //     id: Date.now(),
+  //     title: todo.item
+  //   };
+
+  //   setTodo({
+  //     items: [...todo.items, newItem],
+  //     item: "",
+  //     id: Date.now(),
+  //     editItem: false
+  //   });
+  // };
 
   return (
     <div className="todo-card">
@@ -20,13 +36,16 @@ function Todo() {
             type="text"
             className="form-input"
             placeholder="add a todo"
-            value={item}
+            value={todo.item}
             onChange={handleChange}
           />
 
-          <button className={editItem ? "btn edit" : "btn add"} type="submit">
+          <button
+            className={todo.editItem ? "btn edit" : "btn add"}
+            type="submit"
+          >
             {" "}
-            {editItem ? "edit todo" : "add todo"}{" "}
+            {todo.editItem ? "edit todo" : "add todo"}{" "}
           </button>
         </div>
       </form>

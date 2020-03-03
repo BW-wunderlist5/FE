@@ -100,9 +100,9 @@ export default function TodoPage() {
         <div>
           <NavBar />
           <h1>Your Todo Page</h1>
-          <div className="search-container">
+          {/* <div className="search-container">
             <SearchBar />
-          </div>
+          </div> */}
           <div className="todo-container">
             <h4>Enter Todo</h4>
             <Todo
