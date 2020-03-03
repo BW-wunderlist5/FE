@@ -1,0 +1,61 @@
+.form-input {
+  width: 40%;
+  padding: 0.7% 0;
+  margin-bottom: 0.25%;
+}
+
+.btn.add {
+  background-color: green;
+  color: white;
+  padding: 0.5% 2%;
+  font-weight: bold;
+  font-size: 1rem;
+  border-radius: 4px;
+}
+
+.btn.edit {
+  background-color: aqua;
+  color: darkgray;
+  padding: 0.5% 2%;
+  font-weight: bold;
+  font-size: 1rem;
+  border-radius: 4px;
+}
+
+li {
+  list-style-type: none;
+  margin: 0 auto;
+  padding: 0 0;
+  width: 50%;
+  /* border: 1px solid lightgray; */
+  /* height: 10vh; */
+}
+
+.list-items {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+.todo-icon-container {
+  width: 25%;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+}
+.todo-container {
+  margin: 0 auto;
+  width: 40%;
+  /* border: 1px solid black; */
+}
+
+.todo-title {
+  font-size: 1.5rem;
+  font-weight: 400;
+}
+.clear-list-btn {
+  width: 30%;
+  padding: 1.25% 2%;
+  margin-right: 5%;
+  border-radius: 4px;
+  font-size: 0.75rem;
+}

@@ -1,17 +1,19 @@
 import React from "react";
-import "./App.css";
 import { BrowserRouter as Router, Route } from "react-router-dom";
-import PrivateRoute from "./components/PrivateRoute";
 
+import PrivateRoute from "./components/PrivateRoute";
 import TempLogin from "./components/TempLogin";
 import TodoPage from "./components/TodoPage";
+
+import "./App.css";
+import "./components/TodoList.css";
 
 function App() {
   return (
     <Router>
       <div className="App">
         <Route exact path="/" component={TempLogin} />
-        <PrivateRoute path="todos/users/:userID" component={TodoPage} />
+        <PrivateRoute exact path="/todos" component={TodoPage} />
       </div>
     </Router>
   );
