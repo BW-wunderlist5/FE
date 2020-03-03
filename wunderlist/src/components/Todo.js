@@ -1,8 +1,17 @@
-import React from "react";
+import React, { useContext } from "react";
+import { TodosContext } from "../contexts/TodosContext";
 
 import "react-datepicker/dist/react-datepicker.css";
 
-function Todo({ item, handleChange, handleSubmit, editItem }) {
+function Todo() {
+  // { item, handleChange, handleSubmit, editItem }
+
+  const { item, handleChange, handleSubmit, editItem } = useContext(
+    TodosContext
+  );
+
+  console.log(TodosContext);
+
   return (
     <div className="todo-card">
       <form onSubmit={handleSubmit}>

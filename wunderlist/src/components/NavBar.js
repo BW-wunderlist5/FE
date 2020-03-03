@@ -1,20 +1,34 @@
-import React from "react";
+import React, { useContext } from "react";
 import { NavLink } from "react-router-dom";
 
-const NavBar = ({ user }) => {
+import { UserContext } from "../contexts/UserContext";
+
+import "./NavBar.css";
+
+const NavBar = () => {
+  const { user } = useContext(UserContext);
+
+  const logOut = () => {
+    window.localStorage.clear("token");
+  };
   return (
     <nav className="nav-bar">
       <div className="logo-container">
         <h3 className="logo">
           <span className="logo-span">
-            {" "}
             <i class="fas fa-wave-square"></i>
-            {/* <FontAwesomeIcon icon={faWaveSquare} /> */}
           </span>{" "}
           LOGO HERE{" "}
         </h3>
       </div>
-      <div className="username">{user.email}</div>
+      <div className="avatar-container">
+        <img className="avatar" src={user.avatar} alt="User Avatar" />
+      </div>
+
+      <div className="username">
+        <p className="user-name"> {user.first_name}</p>
+        <p> {user.email}</p>
+      </div>
 
       {/* <img src={logo} alt="logo" /> */}
       <div className="nav-links">
@@ -38,17 +52,15 @@ const NavBar = ({ user }) => {
             </span>
             My Calendar
           </NavLink> */}
-        <NavLink to="/">
+        <NavLink onClick={logOut} to="/">
           <span className="icon-span">
             <i class="fas fa-sign-out-alt"></i>
-            {/* <FontAwesomeIcon icon={faSignOutAlt} /> */}
           </span>
           Log Out
         </NavLink>
         <NavLink to="/help">
           <span className="icon-span">
             <i class="fas fa-questiong-circle"></i>
-            {/* <FontAwesomeIcon icon={faQuestionCircle} /> */}
           </span>
           Help
         </NavLink>

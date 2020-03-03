@@ -1,11 +1,11 @@
 import React from "react";
 import "./App.css";
+import "./components/TodoList.css";
 import { BrowserRouter as Router, Route } from "react-router-dom";
-import PrivateRoute from "./components/PrivateRoute";
+// import PrivateRoute from "./components/PrivateRoute";
 
 import TempLogin from "./components/TempLogin";
 import TodoPage from "./components/TodoPage";
-import NavBar from "./components/NavBar";
 
 function App() {
   return (

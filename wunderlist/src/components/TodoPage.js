@@ -3,14 +3,16 @@ import { axiosWithAuth } from "../utils/axiosWithAuth";
 import Todo from "./Todo";
 import TodoList from "./TodoList";
 import NavBar from "./NavBar";
-import { NavLink } from "react-router-dom";
+import SearchBar from "./SearchBar";
+import { TodosContext } from "../contexts/TodosContext";
+import { UserContext } from "../contexts/UserContext";
 
 //will act as main state holder for component tree
 
 export default function TodoPage() {
   const [user, setUser] = useState([]);
 
-  const [value, setValue] = useState({
+  const [todo, setTodo] = useState({
     items: [],
     id: Date.now(),
     item: "",
@@ -19,7 +21,7 @@ export default function TodoPage() {
 
   const fetchUser = () => {
     axiosWithAuth()
-      .get(`users/2`)
+      .get(`users/3`)
       .then((res) => {
         console.log(res);
         setUser(res.data.data);
@@ -34,8 +36,8 @@ export default function TodoPage() {
   }, []);
 
   const handleChange = (e) => {
-    setValue({
-      ...value,
+    setTodo({
+      ...todo,
       item: e.target.value
     });
   };
@@ -45,11 +47,11 @@ export default function TodoPage() {
 
     const newItem = {
       id: Date.now(),
-      title: value.item
+      title: todo.item
     };
 
-    setValue({
-      items: [...value.items, newItem],
+    setTodo({
+      items: [...todo.items, newItem],
       item: "",
       id: Date.now(),
       editItem: false
@@ -57,23 +59,24 @@ export default function TodoPage() {
   };
 
   const clearList = () => {
-    setValue({
+    setTodo({
       items: []
     });
   };
 
   const handleDelete = (id) => {
-    const filteredItems = value.items.filter((item) => item.id !== id);
-    setValue({
-      items: filteredItems
+    const filteredItems = todo.items.filter((item) => item.id !== id);
+    setTodo({
+      items: filteredItems,
+      item: ""
     });
   };
 
   const handleEdit = (id) => {
-    const filteredItems = value.items.filter((item) => item.id !== id);
-    const selectedItem = value.items.find((item) => item.id === id);
+    const filteredItems = todo.items.filter((item) => item.id !== id);
+    const selectedItem = todo.items.find((item) => item.id === id);
 
-    setValue({
+    setTodo({
       items: filteredItems,
       item: selectedItem.title,
       editItem: true,
@@ -82,26 +85,41 @@ export default function TodoPage() {
   };
 
   return (
-    <div>
-      <NavBar user={user} />
-      <h1>TodoPage</h1>
-      {/* <h3> {user.email} </h3> */}
-
-      <div className="todo-container">
-        <h4>Enter Todo</h4>
-        <Todo
-          item={value.item}
-          handleChange={handleChange}
-          handleSubmit={handleSubmit}
-          editItem={value.editItem}
-        />
-        <TodoList
-          items={value.items}
-          clearList={clearList}
-          handleDelete={handleDelete}
-          handleEdit={handleEdit}
-        />
-      </div>
-    </div>
+    <TodosContext.Provider
+      value={{
+        todo,
+        setTodo,
+        handleChange,
+        handleDelete,
+        handleSubmit,
+        clearList,
+        handleEdit
+      }}
+    >
+      <UserContext.Provider value={{ user }}>
+        <div>
+          <NavBar />
+          <h1>Your Todo Page</h1>
+          <div className="search-container">
+            <SearchBar />
+          </div>
+          <div className="todo-container">
+            <h4>Enter Todo</h4>
+            <Todo
+            // item={value.item}
+            // handleChange={handleChange}
+            // handleSubmit={handleSubmit}
+            // editItem={value.editItem}
+            />
+            <TodoList
+            // items={value.items}
+            // clearList={clearList}
+            // handleDelete={handleDelete}
+            // handleEdit={handleEdit}
+            />
+          </div>
+        </div>
+      </UserContext.Provider>
+    </TodosContext.Provider>
   );
 }
