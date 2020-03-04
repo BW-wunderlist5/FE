@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useContext } from "react";
 
 import "date-fns";
 // import Grid from "@material-ui/core/Grid";
@@ -13,13 +13,6 @@ import { TodosContext } from "../contexts/TodosContext";
 
 const DateComponent = () => {
   const { selectedDate, handleDateChange } = useContext(TodosContext);
-  console.log("date component context props: ", handleDateChange);
-  console.log("date component context props selectedDate: ", selectedDate);
-  // const [selectedDate, setSelectedDate] = useState(new Date());
-
-  // const handleDateChange = (date) => {
-  //   setSelectedDate(date);
-  // };
 
   return (
     <MuiPickersUtilsProvider utils={DateFnsUtils}>

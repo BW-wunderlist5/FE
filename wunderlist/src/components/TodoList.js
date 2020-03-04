@@ -3,30 +3,34 @@ import TodoItem from "./TodoItem";
 import { TodosContext } from "../contexts/TodosContext";
 
 function TodoList() {
-  const list = useContext(TodosContext);
-  console.log("console log for context, list: ", list);
-
-  // const results = list.items.filter((item) => item.includes(searchItems));
-  // let filteredTodos = list.todo.items;
+  // const list = useContext(TodosContext);
+  const {
+    handleDelete,
+    handleEdit,
+    filteredTodos,
+    handleSearch,
+    clearList
+  } = useContext(TodosContext);
+  // console.log("console log for context, list: ", list);
 
   useEffect(() => {
-    list.handleSearch();
-  }, [list.searchItems]);
+    handleSearch();
+  }, []);
 
   return (
     <ul className="todo-ul">
-      {list.filteredTodos.map((item) => {
+      {filteredTodos.map((item) => {
         return (
           <TodoItem
             key={item.id}
             {...item}
-            handleDelete={() => list.handleDelete(item.id)}
-            handleEdit={() => list.handleEdit(item.id)}
+            handleDelete={() => handleDelete(item.id)}
+            handleEdit={() => handleEdit(item.id)}
           />
         );
       })}
 
-      <button onClick={list.clearList} type="button" className="clear-list-btn">
+      <button onClick={clearList} type="button" className="clear-list-btn">
         Clear Todos
       </button>
     </ul>

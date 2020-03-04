@@ -1,7 +1,7 @@
 import React from "react";
 
 function TodoItem(props) {
-  console.log("console.log props for TodoItem component: ", props);
+  // console.log("console.log props for TodoItem component: ", props);
   return (
     <li>
       <div className="list-items">

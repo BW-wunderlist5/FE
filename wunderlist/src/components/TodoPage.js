@@ -26,13 +26,13 @@ export default function TodoPage() {
     axiosWithAuth()
       .get(`users/3`)
       .then((res) => {
-        console.log(res);
+        // console.log(res);
         setUser(res.data.data);
         // localStorage.setItem("user", res.data.token);
       })
       .catch((err) => console.log(err));
   };
-  console.log(user);
+  // console.log(user);
 
   useEffect(() => {
     fetchUser();
