@@ -14,13 +14,13 @@ import { useParams } from "react-router-dom";
 //will act as main state holder for component tree
 
 export default function TodoPage(props) {
-  const [user, setUser] = useState({});
+  const [user, setUser] = useState([]);
   const [searchItems, setSearchItems] = useState("");
   const [darkMode, setDarkMode] = useDarkMode(false);
   const [selectedDate, setSelectedDate] = useState(null);
 
-  const { id } = props.match.params;
-  // const { id } = useParams()
+  // const { id } = props.match.params;
+  const { id } = useParams();
   console.log("console for params", id);
 
   const toggleMode = (e) => {
@@ -36,32 +36,33 @@ export default function TodoPage(props) {
     date: selectedDate
   });
 
-  const fetchUser = () => {
-    axiosWithAuth()
-      .get(`users/1`)
-      .then((res) => {
-        console.log("response for single user request", res);
-        console.log("response for single id", res.data.id);
-        setUser(res.data);
-        // setUser(res.data.id === id ? res.data : user);
-        // localStorage.setItem("user", res.data.token);
-      })
-      .catch((err) => console.log(err));
-  };
-  // console.log(user);
-
-  // const fetchUsers = () => {
+  // const fetchUser = () => {
   //   axiosWithAuth()
-  //     .get("users")
+  //     .get(`users/1`)
   //     .then((res) => {
-  //       console.log("response for all users", res);
+  //       console.log("response for single user request", res);
+  //       console.log("response for single id", res.data.id);
+  //       setUser(res.data);
+  //       // setUser(res.data.id === id ? res.data : user);
+  //       // localStorage.setItem("user", res.data.token);
   //     })
   //     .catch((err) => console.log(err));
   // };
+  // console.log(user);
+
+  const fetchUsers = () => {
+    axiosWithAuth()
+      .get("users")
+      .then((res) => {
+        console.log("response for all users", res);
+        setUser(res.data[2]);
+      })
+      .catch((err) => console.log(err));
+  };
 
   useEffect(() => {
-    fetchUser();
-    // fetchUsers();
+    // fetchUser();
+    fetchUsers();
   }, []);
 
   const handleChange = (e) => {
@@ -98,8 +99,9 @@ export default function TodoPage(props) {
     const newItem = {
       id: Date.now(),
       title: todo.item,
-      time: todo.date
+      time: selectedDate
     };
+    console.log("selectedDate newItem func: ", selectedDate);
 
     setTodo({
       items: [...todo.items, newItem],
