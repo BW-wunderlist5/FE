@@ -45,7 +45,7 @@ const FormikForms = withRouter(
     }),
     handleSubmit(values, { props }) {
       axiosWithAuth()
-        .post(" https://wunderlist5production.herokuapp.com/api/users/", values)
+        .post("http://localhost:3000/", values)
         .then(response => {
           console.log("success", response);
           window.localStorage.setItem("token", response.data.token);
