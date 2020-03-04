@@ -7,14 +7,22 @@ import SearchBar from "./SearchBar";
 import { TodosContext } from "../contexts/TodosContext";
 import { UserContext } from "../contexts/UserContext";
 import Paper from "@material-ui/core/Paper";
-// import { useLocalStorage } from "../hooks/useLocalStorage";
+import { useLocalStorage } from "../hooks/useLocalStorage";
+import { useDarkMode } from "../hooks/DarkMode";
 
 //will act as main state holder for component tree
 
 export default function TodoPage() {
   const [user, setUser] = useState([]);
   const [searchItems, setSearchItems] = useState("");
+  const [darkMode, setDarkMode] = useDarkMode(false);
   const [selectedDate, setSelectedDate] = useState(null);
+
+  const toggleMode = (e) => {
+    e.preventDefault();
+    setDarkMode(!darkMode);
+  };
+
   const [todo, setTodo] = useState({
     items: [],
     id: Date.now(),
@@ -126,17 +134,26 @@ export default function TodoPage() {
           handleSearch,
           filteredTodos,
           handleDateChange,
-          selectedDate
+          selectedDate,
+          darkMode
         }}
       >
         <UserContext.Provider value={{ user }}>
+          <button onClick={toggleMode}>DarkMode</button>
           {/* <div > */}
           <NavBar />
           <h1>Your Todo Page</h1>
           <div className="search-container">
             <SearchBar />
           </div>
-          <Paper className="todo-container">
+          <Paper
+            style={
+              darkMode
+                ? { backgroundColor: "rgb(83, 83, 83)", color: "white" }
+                : { backgroundColor: "white" }
+            }
+            className="todo-container"
+          >
             <h4>Enter Todo</h4>
             <Todo />
             <TodoList />

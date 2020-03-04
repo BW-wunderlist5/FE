@@ -7,7 +7,7 @@
   height: 100vh;
   left: 0;
   top: 0;
-  background-color: #335c81;
+  background-color: #7d82b8;
   box-shadow: 2px #335c81;
 }
 
@@ -18,6 +18,8 @@
 .logo {
   color: white;
   text-align: center;
+  font-size: 1.5rem;
+  margin: 5% 0 10% 0;
 }
 
 .username {

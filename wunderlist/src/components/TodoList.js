@@ -9,7 +9,8 @@ function TodoList() {
     handleEdit,
     filteredTodos,
     handleSearch,
-    clearList
+    clearList,
+    darkMode
   } = useContext(TodosContext);
   // console.log("console log for context, list: ", list);
 
@@ -30,7 +31,16 @@ function TodoList() {
         );
       })}
 
-      <button onClick={clearList} type="button" className="clear-list-btn">
+      <button
+        style={
+          darkMode
+            ? { backgroundColor: "rgb(90, 88, 88)", color: "white" }
+            : { backgroundColor: "white" }
+        }
+        onClick={clearList}
+        type="button"
+        className="clear-list-btn"
+      >
         Clear Todos
       </button>
     </ul>

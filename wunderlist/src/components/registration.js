@@ -3,18 +3,17 @@ import { withFormik, Form, Field } from "formik";
 import { axiosWithAuth } from "../utils/axiosWithAuth";
 import { withRouter, NavLink } from "react-router-dom";
 import * as Yup from "yup";
-import { withRouter } from "react-router-dom";
-import styled from "styled-components";
+// import styled from "styled-components";
 
 const Registration = ({ touched, errors }) => {
   return (
     <div className="container">
       <h2>Registration</h2>
       <Form>
-        <label htmlFor="email">Please provide an Email: </label>
-        <Field name="email" type="email" />
-        {touched.email && errors.email && (
-          <p className="errors">{errors.email}</p>
+        <label htmlFor="username">Please provide a Username: </label>
+        <Field name="username" type="text" />
+        {touched.username && errors.username && (
+          <p className="errors">{errors.username}</p>
         )}
         <br />
         <label htmlFor="password">Please create a Password: </label>
@@ -37,23 +36,23 @@ const Registration = ({ touched, errors }) => {
 
 const FormikForms = withRouter(
   withFormik({
-    mapPropsToValues({ email, password }) {
+    mapPropsToValues({ username, password }) {
       return {
-        email: email || "",
+        username: username || "",
         password: password || ""
       };
     },
     validationSchema: Yup.object().shape({
-      email: Yup.string().required("email is required!"),
+      username: Yup.string().required("username is required!"),
       password: Yup.string().required("password is required!")
     }),
     handleSubmit(values, { props }) {
       axiosWithAuth()
-        .post("/register", values)
+        .post("register", values)
         .then((response) => {
-          console.log("success", response);
+          console.log("success for registration", response);
           window.localStorage.setItem("token", response.data.token);
-          props.history.push("/todos");
+          props.history.replace("/todos");
         })
         .catch((err) => console.log(err.response));
     }

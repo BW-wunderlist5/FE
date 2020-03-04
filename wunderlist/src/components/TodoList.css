@@ -83,3 +83,9 @@ li {
   border-radius: 4px;
   font-size: 0.75rem;
 }
+.input-group {
+  display: flex;
+  justify-content: space-between;
+
+  width: 100%;
+}
