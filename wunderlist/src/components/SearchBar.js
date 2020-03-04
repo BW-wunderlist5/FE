@@ -1,38 +1,41 @@
-import React, { useState, useContext, useEffect } from "react";
+import React, { useContext } from "react";
+
 import { TodosContext } from "../contexts/TodosContext";
 
+// import { makeStyles } from "@material-ui/core/styles";
+import TextField from "@material-ui/core/TextField";
+
+// const useStyles = makeStyles((theme) => ({
+//   root: {
+//     "& > *": {
+//       margin: theme.spacing(0),
+//       width: 250
+//       // height: 50
+//     }
+//   },
+//   textField: {
+//     height: "50px"
+//   }
+// }));
+
 const SearchBar = () => {
-  const search = useContext(TodosContext);
-  const [searchItems, setSearchItems] = useState("");
-  const [searchResults, setSearchResults] = useState([search.todo.items]);
+  // const classes = useStyles();
 
-  console.log("console search context: ", search);
-
-  const handleSearchChange = (e) => {
-    setSearchItems(e.target.value);
-  };
-
-  // useEffect(() => {
-  //   const results = searchResults.filter((item) =>
-  //     item.toLowerCase().includes(searchItems)
-  //   );
-  //   setSearchResults(results);
-  // }, [searchItems]);
-
-  // const handleSearch = (id) => {
-
-  // }
+  const { handleSearchChange, searchItems } = useContext(TodosContext);
 
   return (
     <div className="search-container">
       <form>
-        <input
+        <TextField
+          label="search"
           type="text"
-          placeholder="search..."
+          variant="outlined"
           value={searchItems}
           onChange={handleSearchChange}
         />
-        <i class="fas fa-search"></i>
+        {/* <span>
+          <i class="fas fa-search"></i>
+        </span> */}
       </form>
     </div>
   );
