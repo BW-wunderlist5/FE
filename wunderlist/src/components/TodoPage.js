@@ -9,14 +9,19 @@ import { UserContext } from "../contexts/UserContext";
 import Paper from "@material-ui/core/Paper";
 import { useLocalStorage } from "../hooks/useLocalStorage";
 import { useDarkMode } from "../hooks/DarkMode";
+import { useParams } from "react-router-dom";
 
 //will act as main state holder for component tree
 
-export default function TodoPage() {
+export default function TodoPage(props) {
   const [user, setUser] = useState([]);
   const [searchItems, setSearchItems] = useState("");
   const [darkMode, setDarkMode] = useDarkMode(false);
   const [selectedDate, setSelectedDate] = useState(null);
+
+  // const { id } = props.match.params;
+  const { id } = useParams();
+  // console.log("console for params", id);
 
   const toggleMode = (e) => {
     e.preventDefault();
@@ -25,26 +30,39 @@ export default function TodoPage() {
 
   const [todo, setTodo] = useState({
     items: [],
-    id: Date.now(),
+    id: null,
     item: "",
     editItem: false,
-    date: null
+    date: selectedDate
   });
 
-  const fetchUser = () => {
+  // const fetchUser = () => {
+  //   axiosWithAuth()
+  //     .get(`users/1`)
+  //     .then((res) => {
+  //       console.log("response for single user request", res);
+  //       console.log("response for single id", res.data.id);
+  //       setUser(res.data);
+  //       // setUser(res.data.id === id ? res.data : user);
+  //       // localStorage.setItem("user", res.data.token);
+  //     })
+  //     .catch((err) => console.log(err));
+  // };
+  // console.log(user);
+
+  const fetchUsers = () => {
     axiosWithAuth()
-      .get(`users/3`)
+      .get("users")
       .then((res) => {
-        // console.log(res);
-        setUser(res.data.data);
-        // localStorage.setItem("user", res.data.token);
+        console.log("response for all users", res);
+        setUser(res.data[0]);
       })
       .catch((err) => console.log(err));
   };
-  // console.log(user);
 
   useEffect(() => {
-    fetchUser();
+    // fetchUser();
+    fetchUsers();
   }, []);
 
   const handleChange = (e) => {
@@ -81,13 +99,14 @@ export default function TodoPage() {
     const newItem = {
       id: Date.now(),
       title: todo.item,
-      time: todo.date
+      time: selectedDate
     };
+    console.log("selectedDate newItem func: ", selectedDate);
 
     setTodo({
       items: [...todo.items, newItem],
       item: "",
-      id: Date.now(),
+      id: null,
       editItem: false,
       date: null
     });
@@ -142,7 +161,7 @@ export default function TodoPage() {
           <button onClick={toggleMode}>DarkMode</button>
           {/* <div > */}
           <NavBar />
-          <h1>Your Todo Page</h1>
+          <h1 className="main-header">Your Todo Page</h1>
           <div className="search-container">
             <SearchBar />
           </div>

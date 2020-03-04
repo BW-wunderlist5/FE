@@ -1,12 +1,12 @@
 import React from "react";
 import { BrowserRouter as Router, Route } from "react-router-dom";
-// import LoginForm from "./components/LoginForm";
+import LoginForm from "./components/LoginForm";
 import PrivateRoute from "./components/PrivateRoute";
 
 import TodoPage from "./components/TodoPage";
 
 import Registration from "./components/registration";
-import TempLogin from "./components/TempLogin";
+// import TempLogin from "./components/TempLogin";
 
 import "./App.css";
 import "./components/TodoList.css";
@@ -17,9 +17,9 @@ function App() {
     <Router>
       <div className="App">
         <Route exact path="/" component={Registration} />
-        <Route exact path="/login" component={TempLogin} />
+        <Route exact path="/login" component={LoginForm} />
         {/* private route should be something like /todos/:id */}
-        <PrivateRoute exact path="/todos" component={TodoPage} />
+        <PrivateRoute exact path="/users/:id" component={TodoPage} />
       </div>
     </Router>
   );
