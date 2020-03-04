@@ -38,7 +38,7 @@ const NavBar = () => {
           <span className="logo-span">
             <i class="fas fa-wave-square"></i>
           </span>
-          LOGO HERE
+          WunderList
         </h3>
       </div>
       <div className="avatar-container">
@@ -48,7 +48,6 @@ const NavBar = () => {
 
       <div className="username">
         <p className="user-name"> {user.username}</p>
-        {/* <p> {user.email}</p> */}
       </div>
 
       <div className="nav-links">

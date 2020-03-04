@@ -21,7 +21,7 @@ export default function TodoPage(props) {
 
   // const { id } = props.match.params;
   const { id } = useParams();
-  console.log("console for params", id);
+  // console.log("console for params", id);
 
   const toggleMode = (e) => {
     e.preventDefault();
@@ -55,7 +55,7 @@ export default function TodoPage(props) {
       .get("users")
       .then((res) => {
         console.log("response for all users", res);
-        setUser(res.data[2]);
+        setUser(res.data[0]);
       })
       .catch((err) => console.log(err));
   };
@@ -161,7 +161,7 @@ export default function TodoPage(props) {
           <button onClick={toggleMode}>DarkMode</button>
           {/* <div > */}
           <NavBar />
-          <h1>Your Todo Page</h1>
+          <h1 className="main-header">Your Todo Page</h1>
           <div className="search-container">
             <SearchBar />
           </div>
