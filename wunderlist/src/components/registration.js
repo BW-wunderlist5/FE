@@ -1,11 +1,10 @@
 import React, { useState } from "react";
 import { withFormik, Form, Field } from "formik";
 import { axiosWithAuth } from "../utils/axiosWithAuth";
-import { withRouter } from "react-router-dom";
+import { withRouter, NavLink } from "react-router-dom";
+import * as Yup from "yup";
 
-const Registration = ({}) => {
-  const [person, setPerson] = useState([]);
-
+const Registration = ({ touched, errors }) => {
   return (
     <div className="container">
       <h2>Registration</h2>
@@ -23,10 +22,12 @@ const Registration = ({}) => {
         )}
         <button type="submit">SUBMIT</button>
         <h3>Already registered?</h3>
-        <Route exact path="/login">
+
+        <NavLink to="/login">Login</NavLink>
+        {/* <Route exact path="/login">
           <button type="button">Login here</button>
           <Login />
-        </Route>
+        </Route> */}
       </Form>
     </div>
   );
@@ -46,13 +47,13 @@ const FormikForms = withRouter(
     }),
     handleSubmit(values, { props }) {
       axiosWithAuth()
-        .get("http://localhost:3000/", values)
-        .then(response => {
+        .post("/register", values)
+        .then((response) => {
           console.log("success", response);
-          window.localStorage.setItem("token", response.data.payload);
-          //props.history.replace();
+          window.localStorage.setItem("token", response.data.token);
+          props.history.push("/todos");
         })
-        .catch(err => console.log(err.response));
+        .catch((err) => console.log(err.response));
     }
   })(Registration)
 );

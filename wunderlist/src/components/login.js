@@ -2,10 +2,9 @@ import React, { useState } from "react";
 import { withFormik, Form, Field } from "formik";
 import { axiosWithAuth } from "../utils/axiosWithAuth";
 import { withRouter } from "react-router-dom";
+import * as Yup from "yup";
 
-const LoginForm = ({}) => {
-  const [person, setPerson] = useState([]);
-
+const LoginForm = ({ touched, errors }) => {
   return (
     <div className="container">
       <Form>
@@ -41,12 +40,12 @@ const FormikForms = withRouter(
     handleSubmit(values, { props }) {
       axiosWithAuth()
         .post("login", values)
-        .then(response => {
-          console.log("success", response);
-          window.localStorage.setItem("token", response.data.payload);
-          //props.history.replace();
+        .then((response) => {
+          console.log("success login form ", response);
+          window.localStorage.setItem("token", response.data.token);
+          props.history.replace("/todos");
         })
-        .catch(err => console.log(err.response));
+        .catch((err) => console.log(err.response));
     }
   })(LoginForm)
 );

@@ -1,10 +1,9 @@
 import React, { useContext, useState } from "react";
 import { TodosContext } from "../contexts/TodosContext";
+import DateComponent from "./DateComponent";
 
 function Todo() {
   const { todo, handleChange, handleSubmit } = useContext(TodosContext);
-
-  console.log("todo console from todo.js", todo);
 
   return (
     <div className="todo-card">
@@ -17,6 +16,7 @@ function Todo() {
             value={todo.item}
             onChange={handleChange}
           />
+          <DateComponent />
 
           <button
             className={todo.editItem ? "btn edit" : "btn add"}

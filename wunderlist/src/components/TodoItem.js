@@ -6,6 +6,7 @@ function TodoItem(props) {
     <li>
       <div className="list-items">
         <h6 className="todo-title"> {props.title} </h6>
+        <h6 className="todo-time"> {props.time} </h6>
         <div className="todo-icon-container">
           <span onClick={props.handleEdit}>
             <i class="fas fa-pen"></i>

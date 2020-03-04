@@ -13,11 +13,13 @@ import { UserContext } from "../contexts/UserContext";
 export default function TodoPage() {
   const [user, setUser] = useState([]);
   const [searchItems, setSearchItems] = useState("");
+  const [selectedDate, setSelectedDate] = useState(null);
   const [todo, setTodo] = useState({
     items: [],
     id: Date.now(),
     item: "",
-    editItem: false
+    editItem: false,
+    date: null
   });
 
   const fetchUser = () => {
@@ -43,6 +45,10 @@ export default function TodoPage() {
     });
   };
 
+  const handleDateChange = (date) => {
+    setSelectedDate(date);
+  };
+
   const handleSearchChange = (e) => {
     setSearchItems(e.target.value);
   };
@@ -56,19 +62,25 @@ export default function TodoPage() {
     });
   };
 
+  let filteredTodos = todo.items.filter((item) =>
+    item.title.includes(searchItems)
+  );
+
   const handleSubmit = (e) => {
     e.preventDefault();
 
     const newItem = {
       id: Date.now(),
-      title: todo.item
+      title: todo.item,
+      time: todo.date
     };
 
     setTodo({
       items: [...todo.items, newItem],
       item: "",
       id: Date.now(),
-      editItem: false
+      editItem: false,
+      date: null
     });
   };
 
@@ -99,33 +111,38 @@ export default function TodoPage() {
   };
 
   return (
-    <TodosContext.Provider
-      value={{
-        todo,
-        handleChange,
-        handleDelete,
-        handleSubmit,
-        clearList,
-        handleEdit,
-        handleSearchChange,
-        searchItems,
-        handleSearch
-      }}
-    >
-      <UserContext.Provider value={{ user }}>
-        <div>
-          <NavBar />
-          <h1>Your Todo Page</h1>
-          <div className="search-container">
-            <SearchBar />
+    <div className="Todo">
+      <TodosContext.Provider
+        value={{
+          todo,
+          handleChange,
+          handleDelete,
+          handleSubmit,
+          clearList,
+          handleEdit,
+          handleSearchChange,
+          searchItems,
+          handleSearch,
+          filteredTodos,
+          handleDateChange,
+          selectedDate
+        }}
+      >
+        <UserContext.Provider value={{ user }}>
+          <div>
+            <NavBar />
+            <h1>Your Todo Page</h1>
+            <div className="search-container">
+              <SearchBar />
+            </div>
+            <div className="todo-container">
+              <h4>Enter Todo</h4>
+              <Todo />
+              <TodoList />
+            </div>
           </div>
-          <div className="todo-container">
-            <h4>Enter Todo</h4>
-            <Todo />
-            <TodoList />
-          </div>
-        </div>
-      </UserContext.Provider>
-    </TodosContext.Provider>
+        </UserContext.Provider>
+      </TodosContext.Provider>
+    </div>
   );
 }

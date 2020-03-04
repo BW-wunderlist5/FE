@@ -15,7 +15,7 @@ function TodoList() {
 
   return (
     <ul className="todo-ul">
-      {list.todo.items.map((item) => {
+      {list.filteredTodos.map((item) => {
         return (
           <TodoItem
             key={item.id}
