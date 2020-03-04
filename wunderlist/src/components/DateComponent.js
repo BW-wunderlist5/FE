@@ -17,6 +17,7 @@ const DateComponent = () => {
   return (
     <MuiPickersUtilsProvider utils={DateFnsUtils}>
       <DatePicker
+        className="date-picker"
         value={selectedDate}
         onChange={handleDateChange}
         format={"MM/dd/yyyy"}

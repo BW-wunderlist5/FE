@@ -8,6 +8,7 @@
   left: 0;
   top: 0;
   background-color: #335c81;
+  box-shadow: 2px #335c81;
 }
 
 .logo-container {

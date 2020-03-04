@@ -9,6 +9,7 @@ import Registration from "./components/registration";
 
 import "./App.css";
 import "./components/TodoList.css";
+import "./components/SearchBar.css";
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
       <div className="App">
         <Route exact path="/" component={Registration} />
         <Route exact path="/login" component={Login} />
+        {/* private route should be something like /todos/:id */}
         <PrivateRoute exact path="/todos" component={TodoPage} />
       </div>
     </Router>

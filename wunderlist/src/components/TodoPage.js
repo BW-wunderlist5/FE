@@ -6,6 +6,7 @@ import NavBar from "./NavBar";
 import SearchBar from "./SearchBar";
 import { TodosContext } from "../contexts/TodosContext";
 import { UserContext } from "../contexts/UserContext";
+import Paper from "@material-ui/core/Paper";
 // import { useLocalStorage } from "../hooks/useLocalStorage";
 
 //will act as main state holder for component tree
@@ -129,18 +130,18 @@ export default function TodoPage() {
         }}
       >
         <UserContext.Provider value={{ user }}>
-          <div>
-            <NavBar />
-            <h1>Your Todo Page</h1>
-            <div className="search-container">
-              <SearchBar />
-            </div>
-            <div className="todo-container">
-              <h4>Enter Todo</h4>
-              <Todo />
-              <TodoList />
-            </div>
+          {/* <div > */}
+          <NavBar />
+          <h1>Your Todo Page</h1>
+          <div className="search-container">
+            <SearchBar />
           </div>
+          <Paper className="todo-container">
+            <h4>Enter Todo</h4>
+            <Todo />
+            <TodoList />
+          </Paper>
+          {/* </div> */}
         </UserContext.Provider>
       </TodosContext.Provider>
     </div>
