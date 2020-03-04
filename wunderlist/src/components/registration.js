@@ -2,10 +2,9 @@ import React, { useState } from "react";
 import { withFormik, Form, Field } from "formik";
 import { axiosWithAuth } from "../utils/axiosWithAuth";
 import { withRouter } from "react-router-dom";
+import styled from "styled-components";
 
-const Registration = ({}) => {
-  const [person, setPerson] = useState([]);
-
+const Registration = ({ touched, errors }) => {
   return (
     <div className="container">
       <h2>Registration</h2>
@@ -46,11 +45,11 @@ const FormikForms = withRouter(
     }),
     handleSubmit(values, { props }) {
       axiosWithAuth()
-        .get("http://localhost:3000/", values)
+        .post("http://localhost:3000/", values)
         .then(response => {
           console.log("success", response);
-          window.localStorage.setItem("token", response.data.payload);
-          //props.history.replace();
+          window.localStorage.setItem("token", response.data.token);
+          props.history.push("/todos");
         })
         .catch(err => console.log(err.response));
     }
