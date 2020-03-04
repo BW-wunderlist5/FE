@@ -25,10 +25,10 @@ const LoginForm = ({ touched, errors }) => {
     <NewContainer className="container">
       <NewSection className="section">
         <Form>
-          <label htmlFor="email">Email: </label>
-          <Field name="email" type="email" />
-          {touched.email && errors.email && (
-            <p className="errors">{errors.email}</p>
+          <label htmlFor="username">Username: </label>
+          <Field name="username" type="username" />
+          {touched.username && errors.username && (
+            <p className="errors">{errors.username}</p>
           )}
           <br />
           <label htmlFor="password">Password: </label>
@@ -47,25 +47,25 @@ const LoginForm = ({ touched, errors }) => {
 
 const FormikForms = withRouter(
   withFormik({
-    mapPropsToValues({ email, password }) {
+    mapPropsToValues({ username, password }) {
       return {
-        email: email || "",
+        username: username || "",
         password: password || ""
       };
     },
     validationSchema: Yup.object().shape({
-      email: Yup.string().required("email is required!"),
+      username: Yup.string().required("username is required!"),
       password: Yup.string().required("password is required!")
     }),
     handleSubmit(values, { props }) {
       axiosWithAuth()
         .post("login", values)
-        .then((response) => {
+        .then(response => {
           console.log("success", response);
           window.localStorage.setItem("token", response.data.token);
-          props.history.replace("/todos");
+          //props.history.replace("/todos");
         })
-        .catch((err) => console.log(err.response));
+        .catch(err => console.log(err.response));
     }
   })(LoginForm)
 );
