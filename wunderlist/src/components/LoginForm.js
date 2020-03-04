@@ -4,7 +4,7 @@ import { axiosWithAuth } from "../utils/axiosWithAuth";
 import { withRouter } from "react-router-dom";
 import styled from "styled-components";
 
-import { Jumbotron, Button } from "reactstrap";
+import { Button } from "reactstrap";
 import * as Yup from "yup";
 const LoginForm = ({ touched, errors }) => {
   const NewContainer = styled.div`
