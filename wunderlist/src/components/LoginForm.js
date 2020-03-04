@@ -8,20 +8,23 @@ import { Jumbotron, Button } from "reactstrap";
 import * as Yup from "yup";
 const LoginForm = ({ touched, errors }) => {
   const NewContainer = styled.div`
-    .jumbotron: {
-      background-color: blue;
-    }
+    align-text: center;
+    margin-top: 5%;
+    border: 5px solid blue;
+    background-color: yellow;
+    border-radius: 3%;
+    height: 10rem;
+    width: 40%;
   `;
 
-  //const NewButton = styled.button`
-  //margin: auto;
-  //width: 50%;
-  //border: 2px solid black;
-  //`;
+  const NewSection = styled.section`
+    border: 1px solid black;
+    margin: 5%;
+  `;
 
   return (
     <NewContainer className="container">
-      <Jumbotron>
+      <NewSection className="section">
         <Form>
           <label htmlFor="email">Email: </label>
           <Field name="email" type="email" />
@@ -38,7 +41,7 @@ const LoginForm = ({ touched, errors }) => {
             SUBMIT
           </Button>
         </Form>
-      </Jumbotron>
+      </NewSection>
     </NewContainer>
   );
 };
