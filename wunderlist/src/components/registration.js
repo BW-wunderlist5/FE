@@ -52,7 +52,7 @@ const FormikForms = withRouter(
         .then((response) => {
           console.log("success for registration", response);
           window.localStorage.setItem("token", response.data.token);
-          props.history.replace("/todos");
+          props.history.replace(`users/${response.data.id}`);
         })
         .catch((err) => console.log(err.response));
     }

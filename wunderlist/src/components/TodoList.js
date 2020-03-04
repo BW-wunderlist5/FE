@@ -12,7 +12,7 @@ function TodoList() {
     clearList,
     darkMode
   } = useContext(TodosContext);
-  // console.log("console log for context, list: ", list);
+  // console.log("console log for context, list: ", handleSearch);
 
   useEffect(() => {
     handleSearch();

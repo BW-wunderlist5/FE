@@ -10,6 +10,7 @@ function TodoItem(props) {
         <div className="todo-icon-container">
           <div className="todo-icon-container-title">
             <h6 className="todo-title"> {props.title} </h6>
+            <span>Due Date: </span>
           </div>
           <div className="todo-icons">
             <Button

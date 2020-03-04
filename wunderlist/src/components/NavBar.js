@@ -7,6 +7,7 @@ import "./NavBar.css";
 
 const NavBar = () => {
   const { user } = useContext(UserContext);
+  console.log("console log for user", user);
 
   const logOut = () => {
     window.localStorage.clear("token");
@@ -26,7 +27,7 @@ const NavBar = () => {
       </div>
 
       <div className="username">
-        <p className="user-name"> {user.first_name}</p>
+        <p className="user-name"> {user.username}</p>
         <p> {user.email}</p>
       </div>
 
