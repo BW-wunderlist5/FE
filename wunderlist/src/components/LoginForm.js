@@ -6,22 +6,21 @@ import styled from "styled-components";
 
 import { Button } from "reactstrap";
 import * as Yup from "yup";
+
+const NewContainer = styled.div`
+  margin-top: 5%;
+  border: 5px solid blue;
+  background-color: yellow;
+  border-radius: 3%;
+  height: 10rem;
+  width: 40%;
+`;
+const NewSection = styled.section`
+  border: 1px solid black;
+  margin: 5%;
+`;
+
 const LoginForm = ({ touched, errors }) => {
-  const NewContainer = styled.div`
-    align-text: center;
-    margin-top: 5%;
-    border: 5px solid blue;
-    background-color: yellow;
-    border-radius: 3%;
-    height: 10rem;
-    width: 40%;
-  `;
-
-  const NewSection = styled.section`
-    border: 1px solid black;
-    margin: 5%;
-  `;
-
   return (
     <NewContainer className="container">
       <NewSection className="section">
@@ -61,12 +60,12 @@ const FormikForms = withRouter(
     handleSubmit(values, { props }) {
       axiosWithAuth()
         .post("login", values)
-        .then(response => {
+        .then((response) => {
           console.log("success", response);
           window.localStorage.setItem("token", response.data.token);
-          props.history.push("/todos");
+          props.history.replace("/todos");
         })
-        .catch(err => console.log(err.response));
+        .catch((err) => console.log(err.response));
     }
   })(LoginForm)
 );

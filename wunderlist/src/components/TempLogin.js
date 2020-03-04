@@ -8,8 +8,8 @@ const TempLogin = () => {
     <div>
       <h1>WunderList </h1>
       <Form>
-        <label htmlFor="email">Email</label>
-        <Field type="text" name="email" />
+        <label htmlFor="username">Username</label>
+        <Field type="text" name="username" />
         <label htmlFor="password">Password</label>
         <Field type="password" name="password" />
         <button type="submit">Login</button>
@@ -20,9 +20,9 @@ const TempLogin = () => {
 
 const FormikForm = withRouter(
   withFormik({
-    mapPropsToValues({ email, password }) {
+    mapPropsToValues({ username, password }) {
       return {
-        email: email || "",
+        username: username || "",
         password: password || ""
       };
     },
@@ -31,8 +31,8 @@ const FormikForm = withRouter(
         .post("login", values)
         .then((res) => {
           console.log("console.log for log in stuff", res);
-          window.localStorage.setItem("token", res.data.token);
-          props.history.push("/todos");
+          // window.localStorage.setItem("token", res.data.token);
+          // props.history.replace(`todos`);
         })
         .catch((err) => console.log(err));
     }

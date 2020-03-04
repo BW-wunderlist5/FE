@@ -1,30 +1,32 @@
-import React, { useContext, useState } from "react";
+import React, { useContext } from "react";
 import { TodosContext } from "../contexts/TodosContext";
+import DateComponent from "./DateComponent";
+import TextField from "@material-ui/core/TextField";
+import Button from "@material-ui/core/Button";
 
 function Todo() {
   const { todo, handleChange, handleSubmit } = useContext(TodosContext);
-
-  console.log("todo console from todo.js", todo);
 
   return (
     <div className="todo-card">
       <form onSubmit={handleSubmit}>
         <div className="input-group">
-          <input
+          <TextField
             type="text"
             className="form-input"
             placeholder="add a todo"
             value={todo.item}
             onChange={handleChange}
           />
+          <DateComponent />
 
-          <button
+          <Button
             className={todo.editItem ? "btn edit" : "btn add"}
             type="submit"
           >
             {" "}
             {todo.editItem ? "edit todo" : "add todo"}{" "}
-          </button>
+          </Button>
         </div>
       </form>
     </div>
