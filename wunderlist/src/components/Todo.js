@@ -7,6 +7,8 @@ import Button from "@material-ui/core/Button";
 function Todo() {
   const { todo, handleChange, handleSubmit } = useContext(TodosContext);
 
+  console.log("log Todo context from Todo.js", todo);
+
   return (
     <div className="todo-card">
       <form onSubmit={handleSubmit}>
