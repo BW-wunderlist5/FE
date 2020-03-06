@@ -72,10 +72,12 @@ const FormikForms = withRouter(
           console.log("user id", response.data.id);
           window.localStorage.setItem("token", response.data.token);
           props.history.replace(`/users/${response.data.id}`);
-          axios.get(
-            "https://wunderlist5production.herokuapp.com/api/users/",
-            values
-          );
+          axios
+            .get(
+              "https://wunderlist5production.herokuapp.com/api/users/",
+              values
+            )
+            .catch(err => console.log(err.response));
         })
         .catch(err => console.log(err.response));
     }
