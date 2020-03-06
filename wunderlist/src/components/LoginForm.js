@@ -12,7 +12,6 @@ const NewContainer = styled.div`
   border: 5px solid blue;
   background-color: yellow;
   border-radius: 3%;
-  height: 10rem;
   width: 40%;
 `;
 const NewSection = styled.section`
@@ -64,7 +63,7 @@ const FormikForms = withRouter(
           console.log("success", response);
           console.log("user id", response.data.id);
           window.localStorage.setItem("token", response.data.token);
-          props.history.replace(`/users/${response.data.id}`);
+          props.history.push(`/users/${response.data.id}`);
         })
         .catch((err) => console.log(err.response));
     }
