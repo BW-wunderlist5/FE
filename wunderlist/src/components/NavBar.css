@@ -8,7 +8,19 @@
   left: 0;
   top: 0;
   background-color: #7d82b8;
-  box-shadow: 2px #335c81;
+  border-right: none;
+  /* box-shadow: 2px #335c81; */
+  /* background-color: #a3bcf9; */
+}
+
+.nav-bar.dark {
+  background-color: rgb(88, 87, 87);
+  border-right: #a3bcf9;
+}
+
+.darktoggle.dark-button {
+  background-color: #a3bcf9;
+  color: rgb(46, 45, 45);
 }
 
 .logo-container {
@@ -34,9 +46,10 @@
 }
 
 .user-name {
-  font-size: 1.2rem;
+  font-size: 1rem;
   font-weight: 500;
   margin-top: 5%;
+  color: yellow;
 }
 
 /* .logo-span {
@@ -61,7 +74,7 @@
 }
 
 .nav-links {
-  margin-top: 40%;
+  margin-top: 30%;
   height: 80vh;
   display: flex;
   flex-direction: column;
@@ -83,6 +96,18 @@
   display: flex;
   justify-content: center;
 }
+
 /* .user-name {
   margin-right: 60%;
 } */
+
+.darktoggle {
+  width: 80%;
+  margin-top: 8%;
+  padding: 3% 0;
+  background-color: rgb(46, 45, 45);
+  border: none;
+  color: #dae4fd;
+  font-weight: 500;
+  border-radius: 6px;
+}

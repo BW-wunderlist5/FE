@@ -16,8 +16,8 @@ const useStyles = makeStyles((theme) => ({
     }
   },
   orange: {
-    color: theme.palette.getContrastText(deepOrange[500]),
-    backgroundColor: deepOrange[500],
+    // color: theme.palette.getContrastText(deepOrange[500]),
+    // backgroundColor: deepOrange[500],
     width: "75px",
     height: "75px"
   }
@@ -25,14 +25,14 @@ const useStyles = makeStyles((theme) => ({
 
 const NavBar = () => {
   const classes = useStyles();
-  const { user } = useContext(UserContext);
-  console.log("console log for user", user);
+  const { user, darkMode, toggleMode } = useContext(UserContext);
+  //console.log("console log for user", user);
 
   const logOut = () => {
     window.localStorage.clear("token");
   };
   return (
-    <nav className="nav-bar">
+    <nav className={darkMode ? "nav-bar dark" : "nav-bar"}>
       <div className="logo-container">
         <h3 className="logo">
           <span className="logo-span">
@@ -42,13 +42,20 @@ const NavBar = () => {
         </h3>
       </div>
       <div className="avatar-container">
-        <Avatar className={classes.orange}>OP</Avatar>
+        <Avatar className={classes.orange}>WL</Avatar>
         {/* <img className="avatar" src={user.avatar} alt="User Avatar" /> */}
       </div>
 
       <div className="username">
-        <p className="user-name"> {user.username}</p>
+        <p className="user-name"> Welcome {user.username} ! </p>
       </div>
+
+      <button
+        className={darkMode ? "darktoggle dark-button" : "darktoggle"}
+        onClick={toggleMode}
+      >
+        DarkMode
+      </button>
 
       <div className="nav-links">
         <NavLink to="/">
@@ -57,7 +64,7 @@ const NavBar = () => {
           </span>
           Home
         </NavLink>
-        <NavLink to="/todos">
+        <NavLink to="/tasks">
           <span className="icon-span">
             <i class="fas fa-list-alt"></i>
           </span>

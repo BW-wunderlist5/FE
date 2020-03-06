@@ -18,8 +18,8 @@ function App() {
       <div className="App">
         <Route exact path="/" component={Registration} />
         <Route exact path="/login" component={LoginForm} />
-        {/* private route should be something like /todos/:id */}
         <PrivateRoute exact path="/users/:id" component={TodoPage} />
+        <Route exact path="/tasks" component={TodoPage} />
       </div>
     </Router>
   );

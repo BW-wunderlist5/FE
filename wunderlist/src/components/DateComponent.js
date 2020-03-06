@@ -9,7 +9,7 @@ import { TodosContext } from "../contexts/TodosContext";
 
 const DateComponent = () => {
   const { selectedDate, handleDateChange } = useContext(TodosContext);
-  console.log("Log from Date component: ", selectedDate);
+  //console.log("Log from Date component: ", selectedDate);
 
   return (
     <MuiPickersUtilsProvider utils={DateFnsUtils}>

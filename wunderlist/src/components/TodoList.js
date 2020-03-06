@@ -5,31 +5,36 @@ import { TodosContext } from "../contexts/TodosContext";
 function TodoList() {
   // const list = useContext(TodosContext);
   const {
+    todo,
+    todos,
+    //setTodo,
     handleDelete,
     handleEdit,
-    filteredTodos,
-    handleSearch,
+    //filteredTodos,
+    // handleSearch,
     clearList,
     darkMode
   } = useContext(TodosContext);
-  // console.log("console log for context, list: ", handleSearch);
+  // console.log("todo from todolist : ", todo);
 
-  useEffect(() => {
-    handleSearch();
-  }, []);
+  // useEffect(() => {
+  //   handleSearch();
+  // }, []);
 
   return (
     <ul className="todo-ul">
-      {filteredTodos.map((item) => {
-        return (
-          <TodoItem
-            key={item.id}
-            {...item}
-            handleDelete={() => handleDelete(item.id)}
-            handleEdit={() => handleEdit(item.id)}
-          />
-        );
-      })}
+      {todos &&
+        todos.map((item) => {
+          return (
+            <TodoItem
+              key={item.id}
+              {...item}
+              // item={item}
+              handleDelete={() => handleDelete(item.id)}
+              handleEdit={() => handleEdit(item.id)}
+            />
+          );
+        })}
 
       <button
         style={

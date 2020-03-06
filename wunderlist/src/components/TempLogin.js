@@ -30,7 +30,7 @@ const FormikForm = withRouter(
       axiosWithAuth()
         .post("login", values)
         .then((res) => {
-          console.log("console.log for log in stuff", res);
+          //  console.log("console.log for log in stuff", res);
           // window.localStorage.setItem("token", res.data.token);
           // props.history.replace(`todos`);
         })

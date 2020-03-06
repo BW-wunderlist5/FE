@@ -6,9 +6,7 @@ import Button from "@material-ui/core/Button";
 
 function Todo() {
   const { todo, handleChange, handleSubmit } = useContext(TodosContext);
-
-  console.log("log Todo context from Todo.js", todo);
-
+  console.log("handlesubmit: ", handleSubmit);
   return (
     <div className="todo-card">
       <form onSubmit={handleSubmit}>
@@ -17,7 +15,7 @@ function Todo() {
             type="text"
             className="form-input"
             placeholder="add a todo"
-            value={todo.item}
+            value={todo.name}
             onChange={handleChange}
           />
           <DateComponent />
