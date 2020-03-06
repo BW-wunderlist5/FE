@@ -6,15 +6,16 @@ function TodoList() {
   // const list = useContext(TodosContext);
   const {
     todo,
-    setTodo,
+    todos,
+    //setTodo,
     handleDelete,
     handleEdit,
-    filteredTodos,
-    handleSearch,
+    //filteredTodos,
+    // handleSearch,
     clearList,
     darkMode
   } = useContext(TodosContext);
-  console.log("todo from todolist : ", todo);
+  // console.log("todo from todolist : ", todo);
 
   // useEffect(() => {
   //   handleSearch();
@@ -22,12 +23,13 @@ function TodoList() {
 
   return (
     <ul className="todo-ul">
-      {todo.items &&
-        todo.items.map((item) => {
+      {todos &&
+        todos.map((item) => {
           return (
             <TodoItem
               key={item.id}
               {...item}
+              // item={item}
               handleDelete={() => handleDelete(item.id)}
               handleEdit={() => handleEdit(item.id)}
             />

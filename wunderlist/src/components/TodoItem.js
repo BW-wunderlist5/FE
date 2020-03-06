@@ -3,7 +3,7 @@ import Button from "@material-ui/core/Button";
 import { format } from "date-fns";
 
 function TodoItem(props) {
-  console.log("fucking log you stupid fuck : ", props);
+  // console.log("fucking log you stupid fuck : ", props);
 
   const editTodo = () => {};
 

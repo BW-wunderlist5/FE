@@ -60,8 +60,8 @@ const FormikForms = withRouter(
       axiosWithAuth()
         .post("login", values)
         .then((response) => {
-          console.log("success", response);
-          console.log("user id", response.data.id);
+          //  console.log("success", response);
+          // console.log("user id", response.data.id);
           window.localStorage.setItem("token", response.data.token);
           props.history.push(`/users/${response.data.id}`);
         })

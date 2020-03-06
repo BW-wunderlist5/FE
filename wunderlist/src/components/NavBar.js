@@ -26,7 +26,7 @@ const useStyles = makeStyles((theme) => ({
 const NavBar = () => {
   const classes = useStyles();
   const { user, darkMode, toggleMode } = useContext(UserContext);
-  console.log("console log for user", user);
+  //console.log("console log for user", user);
 
   const logOut = () => {
     window.localStorage.clear("token");

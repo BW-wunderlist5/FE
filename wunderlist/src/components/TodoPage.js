@@ -7,7 +7,7 @@ import SearchBar from "./SearchBar";
 import { TodosContext } from "../contexts/TodosContext";
 import { UserContext } from "../contexts/UserContext";
 import Paper from "@material-ui/core/Paper";
-import { useLocalStorage } from "../hooks/useLocalStorage";
+//import { useLocalStorage } from "../hooks/useLocalStorage";
 import { useDarkMode } from "../hooks/DarkMode";
 import { useParams } from "react-router-dom";
 
@@ -19,52 +19,51 @@ const initialValues = {
 
 export default function TodoPage(props) {
   const [user, setUser] = useState([]);
-  const [searchItems, setSearchItems] = useState("");
-  const [darkMode, setDarkMode] = useDarkMode(false);
-  const [selectedDate, setSelectedDate] = useState(null);
-  const [newItem, setNewItem] = useState(initialValues);
+  //const [searchItems, setSearchItems] = useState("");
+  //const [darkMode, setDarkMode] = useDarkMode(false);
+  //const [selectedDate, setSelectedDate] = useState(null);
+  // const [newItem, setNewItem] = useState(initialValues);
 
-  // const { id } = props.match.params;
-  const { id } = useParams();
-  // console.log("console for params", id);
-
-  const toggleMode = (e) => {
-    e.preventDefault();
-    setDarkMode(!darkMode);
-  };
+  const [todos, setTodos] = useState([]);
 
   const [todo, setTodo] = useState({
-    items: [],
-    id: null,
-    name: "",
-    editItem: false,
-    date: selectedDate
+    name: ""
   });
+
+  // const [todoToEdit, setTodoToEdit] = useState({
+  //   name: "",
+  //   editing: false
+  // });
+  const [editing, setEditing] = useState(false);
+
+  const { id } = useParams();
+
+  // const toggleMode = (e) => {
+  //   e.preventDefault();
+  //   setDarkMode(!darkMode);
+  // };
 
   const fetchUser = () => {
     axiosWithAuth()
       .get(`users/${id}`)
       .then((res) => {
-        console.log("response for single user request", res);
-        console.log("response for single id", res.data.id);
+        //console.log("response for single user request", res);
+        // console.log("response for single id", res.data.id);
         setUser(res.data);
       })
       .catch((err) => console.log(err));
   };
-  console.log(user);
 
   const getTasks = () => {
     axiosWithAuth()
       .get("tasks")
       .then((res) => {
-        console.log("tasks response from todopage: ", res);
-        let filteredTodos = res.data.filter((item) =>
-          item.name.includes(searchItems)
-        );
-        console.log("console of filtered todos from axios", filteredTodos);
-        setTodo({
-          items: filteredTodos
-        });
+        console.log("tasks response from todopage: ", res.data);
+        // let filteredTodos = res.data.filter((item) =>
+        //   item.name.includes(searchItems)
+        // );
+        // console.log("console of filtered todos from axios", filteredTodos);
+        setTodos(res.data);
         // setTodo({
         //   items: res.data
         // });
@@ -80,17 +79,17 @@ export default function TodoPage(props) {
   const handleChange = (e) => {
     setTodo({
       ...todo,
-      item: e.target.value
+      name: e.target.value
     });
   };
 
-  const handleDateChange = (date) => {
-    setSelectedDate(date);
-  };
+  // const handleDateChange = (date) => {
+  //   setSelectedDate(date);
+  // };
 
-  const handleSearchChange = (e) => {
-    setSearchItems(e.target.value);
-  };
+  // const handleSearchChange = (e) => {
+  //   setSearchItems(e.target.value);
+  // };
 
   // const handleSearch = () => {
   //   let filteredTodos = todo.items.filter((item) =>
@@ -105,21 +104,14 @@ export default function TodoPage(props) {
   //   item.title.includes(searchItems)
   // );
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
+  const handleSubmit = () => {
+    // e.preventDefault();
+    console.log("post todo:", todo);
     axiosWithAuth()
-      .post("tasks/add", newItem)
+      .post("tasks/add", todo)
       .then((res) => {
         console.log("post response todoPage: ", res);
-        const newItem = {
-          id: Date.now(),
-          name: todo.name
-        };
-        setNewItem({
-          items: [...todo.items, newItem],
-          name: "",
-          id: null
-        });
+        getTasks();
       })
       .catch((err) => console.log(err));
   };
@@ -143,41 +135,35 @@ export default function TodoPage(props) {
   //   });
   // };
 
-  const clearList = () => {
-    setTodo({
-      items: []
-    });
-  };
-
   const handleDelete = (id) => {
     axiosWithAuth()
       .delete(`tasks/${id}`)
       .then((res) => {
-        console.log("delete response from todopage: ", res);
-        const filteredItems = todo.items.filter((item) => item.id !== id);
-        setTodo({
-          items: filteredItems,
-          item: ""
-        });
+        getTasks();
+        // console.log("delete response from todopage: ", res);
       })
       .catch((err) => console.log(err));
   };
 
   const handleEdit = (id) => {
+    console.log("editing//////////////////");
     axiosWithAuth()
-      .put(`/tasks/${id}`)
+      .put(`/tasks/${id}`, todo)
       .then((res) => {
-        console.log("put response for todopage: ", res);
+        console.log("edit res", res);
+        getTasks();
 
-        const filteredItems = todo.items.filter((item) => item.id !== id);
-        const selectedItem = todo.items.find((item) => item.id === id);
+        //  console.log("put response for todopage: ", res);
 
-        setTodo({
-          items: filteredItems,
-          name: selectedItem.name,
-          editItem: true,
-          id: id
-        });
+        // const filteredItems = todo.items.filter((item) => item.id !== id);
+        // const selectedItem = todo.items.find((item) => item.id === id);
+
+        // setTodo({
+        //   items: filteredItems,
+        //   name: selectedItem.name,
+        //   editItem: true,
+        //   id: id
+        // });
       })
       .catch((err) => console.log(err));
   };
@@ -188,19 +174,19 @@ export default function TodoPage(props) {
         value={{
           todo,
           setTodo,
+          todos,
           handleChange,
           handleDelete,
           handleSubmit,
-          clearList,
-          handleEdit,
-          handleSearchChange,
-          searchItems,
+          handleEdit
+          //handleSearchChange,
+          //searchItems,
           // handleSearch,
           //filteredTodos,
-          handleDateChange,
-          selectedDate,
-          darkMode,
-          toggleMode
+          //  handleDateChange,
+          // selectedDate,
+          // darkMode,
+          // toggleMode
         }}
       >
         <UserContext.Provider value={{ user }}>
@@ -210,11 +196,11 @@ export default function TodoPage(props) {
             <SearchBar />
           </div>
           <Paper
-            style={
-              darkMode
-                ? { backgroundColor: "rgb(83, 83, 83)", color: "white" }
-                : { backgroundColor: "white" }
-            }
+            // style={
+            //   darkMode
+            //     ? { backgroundColor: "rgb(83, 83, 83)", color: "white" }
+            //     : { backgroundColor: "white" }
+            // }
             className="todo-container"
           >
             <h4>Enter Todo</h4>
