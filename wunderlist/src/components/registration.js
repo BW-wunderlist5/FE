@@ -91,6 +91,7 @@ const FormikForms = withRouter(
           "https://wunderlist5production.herokuapp.com/api/register",
           values
         )
+
         .then(response => {
           console.log("success for registration", response);
           window.localStorage.setItem("token", response.data.token);
