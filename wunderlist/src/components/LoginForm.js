@@ -1,22 +1,29 @@
-import React, { useState } from "react";
+import React from "react";
 import { withFormik, Form, Field } from "formik";
 import { axiosWithAuth } from "../utils/axiosWithAuth";
 import { withRouter } from "react-router-dom";
 import styled from "styled-components";
 
-import { Jumbotron, Button } from "reactstrap";
+import { Button } from "reactstrap";
 import * as Yup from "yup";
 
 const NewContainer = styled.div`
   margin-top: 5%;
   border: 5px solid blue;
-  background-color: yellow;
-  border-radius: 3%;
+  background-color: gold;
+  border-radius: 20%;
   width: 40%;
 `;
 const NewSection = styled.section`
-  border: 1px solid black;
+  border: 3px solid blue;
+  background-color: lightblue;
   margin: 5%;
+  border-radius: 20%;
+  padding: 2%;
+  color: blue;
+`;
+const NewP = styled.p`
+  color: red;
 `;
 
 const LoginForm = ({ touched, errors }) => {
@@ -53,19 +60,21 @@ const FormikForms = withRouter(
       };
     },
     validationSchema: Yup.object().shape({
-      username: Yup.string().required("username is required!"),
-      password: Yup.string().required("password is required!")
+      username: Yup.string().required(<NewP>username required!</NewP>),
+      password: Yup.string().required(<NewP>password required!</NewP>)
     }),
     handleSubmit(values, { props }) {
       axiosWithAuth()
         .post("login", values)
-        .then((response) => {
-          //  console.log("success", response);
-          // console.log("user id", response.data.id);
+
+        .then(response => {
+          console.log("success", response);
+          console.log("user id", response.data.id);
+
           window.localStorage.setItem("token", response.data.token);
           props.history.push(`/users/${response.data.id}`);
         })
-        .catch((err) => console.log(err.response));
+        .catch(err => console.log(err.response));
     }
   })(LoginForm)
 );
